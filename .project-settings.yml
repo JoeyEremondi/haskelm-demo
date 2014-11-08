@@ -1,3 +1,6 @@
+binary-ghc-args:
+- -O
+- -threaded
 module-template: ! 'module MODULE_NAME where
 
 '
@@ -7,9 +10,30 @@ extensions:
   QuasiQuotes: true
   TypeFamilies: true
   MultiParamTypeClasses: true
-environment: ghc-7.4.2-stable-13.09
+environment: ghc-7.8-stable-14.09
+auto-hidden: []
 cabal-file: project.cabal
 version: 1
-extra-packages: ''
+extra-packages: ! 'Hackage: QuasiText 0.1.2.5
+
+  Hackage: prettyclass 1.0.0.0
+
+  Hackage: language-glsl 0.1.1
+
+  Hackage: union-find 0.2
+
+  Hackage: highlighting-kate 0.5.9
+
+  Hackage: aeson-pretty 0.7.1
+
+  Hackage: cheapskate 0.1.0.1
+
+  Git: https://github.com/elm-lang/Elm.git 4e1cde74a4
+
+  Git: https://github.com/JoeyEremondi/elm-build-lib.git e0061def9462c128fe452976b2a048386d7f6513
+
+  Git: https://github.com/JoeyEremondi/haskelm.git fef9d90bd4e1d3473ec48d2fa3152b8a3692bcc7
+
+'
 ghc-args: []
 excluded-modules: []

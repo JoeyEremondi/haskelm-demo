@@ -2,6 +2,8 @@ module Handler.Home where
 
 import Import
 
+import Language.Elm.Build
+
 {-
 
 Yesod follows a naming convention for handler function names: the lower-cased
