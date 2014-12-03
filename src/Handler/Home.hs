@@ -10,6 +10,7 @@ import ElmSource.Home
 
 import Control.Monad (forM)
 
+
 import Language.Elm.Build (deriveElmJS)
 import Text.Julius
 import Data.Text
@@ -56,6 +57,7 @@ getHomeR = defaultLayout $ do
     toWidget [julius|
       var stamperDiv = document.getElementById('Chat');
       Elm.embed(Elm.Chat, stamperDiv);
+
     |]
 
     -- Similar to Hamlet, Yesod has Lucius for CSS, and Julius for Javascript.
@@ -94,3 +96,5 @@ sampleForm :: AForm (FileInfo, Text)
 sampleForm = renderDivs $ (,)
     <$> fileAFormReq "Choose a file"
     <*> areq textField "What's on the file?" Nothing
+    toWidget chatJS
+    
