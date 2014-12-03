@@ -1,21 +1,31 @@
+{-# LANGUAGE TupleSections, OverloadedStrings #-}
 module Handler.Home where
 
+
+
+
+
 import Import
-import ElmSource.Chat
+import ElmSource.Home
+
+import Control.Monad (forM)
+
+import Language.Elm.Build (deriveElmJS)
+import Text.Julius
+import Data.Text
+import Data.Text.Lazy.Builder (fromString)
+
+--Need to do TH compiling in separate module
+homeJS =  Javascript $ fromString $(deriveElmJS [homeModule])
 
 
-
-{-
-
-Yesod follows a naming convention for handler function names: the lower-cased
-HTTP request method, followed by the route name. Therefore, the function for
-HomeR's GET handler would be getHomeR.
-
-Each handler function lives in the Handler monad, and has to return a value
-that can be serialized over an HTTP connection. Two common examples of such
-values are HTML and JSON data. In this case, we'll return Html.
-
--}
+-- This is a handler function for the GET request method on the HomeR
+-- resource pattern. All of your resource patterns are defined in
+-- config/routes
+--
+-- The majority of the code you will write in Yesod lives in these handler
+-- functions. You can spread them across multiple files if you are so
+-- inclined, or create a single monolithic file.
 getHomeR :: Handler Html
 -- defaultLayout uses the application's standard page layout to display
 -- some contents. In our application, we're just using the standard
@@ -33,10 +43,19 @@ getHomeR = defaultLayout $ do
     -- the bootstrap CSS we just included.
     -- For more information on Hamlet, please see:
     -- http://www.yesodweb.com/book/shakespearean-templates
+    toWidget homeJS
     [whamlet|
         <div .container-fluid>
           <div .row-fluid>
             <h1>Haskelm Chat Demo
+            <div id="Chat" style="width:50%; height:400px;">
+ 
+          
+    |]
+    
+    toWidget [julius|
+      var stamperDiv = document.getElementById('Chat');
+      Elm.embed(Elm.Chat, stamperDiv);
     |]
 
     -- Similar to Hamlet, Yesod has Lucius for CSS, and Julius for Javascript.
@@ -56,5 +75,22 @@ getHomeR = defaultLayout $ do
             background: #cfc;
         }
     |]
-    toWidget chatJS
-    
+    return ()
+
+postHomeR :: Handler Html
+postHomeR = do
+    ((result, formWidget), formEnctype) <- runFormPost sampleForm
+    let handlerName = "postHomeR" :: Text
+        submission = case result of
+            FormSuccess res -> Just res
+            _ -> Nothing
+
+    defaultLayout $ do
+        aDomId <- newIdent
+        setTitle "Welcome To Yesod!"
+        $(widgetFile "homepage")
+
+sampleForm :: AForm (FileInfo, Text)
+sampleForm = renderDivs $ (,)
+    <$> fileAFormReq "Choose a file"
+    <*> areq textField "What's on the file?" Nothing
