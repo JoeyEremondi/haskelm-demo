@@ -17,30 +17,43 @@ import qualified Data.Map as Map
 homeModule :: String
 homeModule = unpack [embed|
 
+import Graphics.Element (..)
 import Graphics.Input as Input
-import Graphics.Element (flow, down, Element)
-import Signal (..)
+--import Markdown
+import Signal
 import Text (plainText)
+
 
 main : Element
 main =
-    flow down
-        [ message
-        --, Input.button click.handle () "Go to chat!"
-        ]
+  flow down
+    [ message
+    , Input.button (Signal.send click ()) "Redirect to elm-lang.org"
+    ]
 
-click : Channel ()
-click = channel ()
+
+click : Signal.Channel ()
+click =
+  Signal.channel ()
+
 
 port redirect : Signal String
 port redirect =
-    merge
-        (constant "")
-        (always "chat/testRoom" <~ click.signal)
+  Signal.merge
+    (Signal.constant "")
+    (Signal.map (always "http://elm-lang.org") (Signal.subscribe click))
+
 
 message : Element
-message = plainText "Enter the name of the chat room to go to (or create)"
+message = plainText "Hello"
+
+
+
 
 
 |]
+
+--homeJS = Javascript $ fromString $ case (compileAll [homeModule]) of
+--    Right s -> s
+--    Left e -> error e
 

@@ -16,6 +16,8 @@ import Text.Julius
 import Data.Text
 import Data.Text.Lazy.Builder (fromString)
 
+import Control.Applicative
+
 --Need to do TH compiling in separate module
 homeJS =  Javascript $ fromString $(deriveElmJS [homeModule])
 
@@ -79,22 +81,5 @@ getHomeR = defaultLayout $ do
     |]
     return ()
 
-postHomeR :: Handler Html
-postHomeR = do
-    ((result, formWidget), formEnctype) <- runFormPost sampleForm
-    let handlerName = "postHomeR" :: Text
-        submission = case result of
-            FormSuccess res -> Just res
-            _ -> Nothing
 
-    defaultLayout $ do
-        aDomId <- newIdent
-        setTitle "Welcome To Yesod!"
-        $(widgetFile "homepage")
-
-sampleForm :: AForm (FileInfo, Text)
-sampleForm = renderDivs $ (,)
-    <$> fileAFormReq "Choose a file"
-    <*> areq textField "What's on the file?" Nothing
-    toWidget chatJS
     

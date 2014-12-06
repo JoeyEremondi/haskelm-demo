@@ -24,9 +24,9 @@ extra-packages: ! 'Hackage: QuasiText 0.1.2.5
 
   Hackage: aeson-pretty 0.7.1
 
-  Git: https://github.com/elm-lang/elm-compiler.git 629a71d8e88da1e3ba8fa1827729837623dff51e
+  Git: https://github.com/elm-lang/elm-compiler.git cfaeff971e5a549f2121aaa12901e5991acb6f45
 
-  Git: https://github.com/JoeyEremondi/core.git d9404abd4ad04cccd02fcaec91c61d8a9414b79b
+  Git: https://github.com/JoeyEremondi/core.git 1c64fa573c32ddcc5507143e0f5c030a110e2fe2
 
   Git: https://github.com/JoeyEremondi/elm-build-lib.git c0a47cdb337625ea70d6b065de14a40ec573751f
 

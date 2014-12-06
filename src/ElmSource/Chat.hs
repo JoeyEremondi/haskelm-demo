@@ -12,6 +12,8 @@ import Language.Elm.Build
 import Text.Julius
 import Data.Text.Lazy.Builder (fromString)
 
+import Data.List
+
 
 chatModule :: String
 chatModule = unpack [embed|
@@ -24,7 +26,5 @@ main = plainText "Hello"
 
 
 
-chatJS = Javascript $ fromString $ case (compileAll [chatModule]) of
-    Right s -> s
-    Left e -> error e
+--chatJS = Javascript $ fromString $(deriveElmJS [chatModule])
 
