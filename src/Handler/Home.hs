@@ -11,7 +11,7 @@ import ElmSource.Home
 import Control.Monad (forM)
 
 
-import Language.Elm.Build (deriveElmJS)
+import Language.Elm.Build (deriveElmJS, standalone, compileAll)
 import Text.Julius
 import Data.Text
 import Data.Text.Lazy.Builder (fromString)
@@ -19,7 +19,7 @@ import Data.Text.Lazy.Builder (fromString)
 import Control.Applicative
 
 --Need to do TH compiling in separate module
-homeJS =  Javascript $ fromString $(deriveElmJS [homeModule])
+homeJS =  Javascript $  $(deriveElmJS [homeModule])
 
 
 -- This is a handler function for the GET request method on the HomeR

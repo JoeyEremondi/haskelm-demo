@@ -17,7 +17,7 @@ import Data.List
 
 chatModule :: String
 chatModule = unpack [embed|
-module Chat where
+module Chat where 
 
 import Text (plainText)
 
