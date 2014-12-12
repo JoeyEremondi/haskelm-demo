@@ -24,11 +24,11 @@ extra-packages: ! 'Hackage: QuasiText 0.1.2.5
 
   Hackage: aeson-pretty 0.7.1
 
-  Git: https://github.com/elm-lang/elm-compiler.git 12af2306abbbb5817d4dde7efe4e7cb2f9d12c42
+  Hackage: elm-compiler 0.14
 
-  Git: https://github.com/JoeyEremondi/core.git a4b0ee17150508ef6a41bce0153153bcb1b8cc3c
+  Hackage: elm-core-sources 1.0.0
 
-  Git: https://github.com/JoeyEremondi/elm-build-lib.git 48a6b84e397bec932e0ebce24902969a8ec0d0ff
+  Git: https://github.com/JoeyEremondi/elm-build-lib.git 2499397988c79c75faba460d4746f31a15e74eac
 
   Git: https://github.com/JoeyEremondi/haskelm.git fef9d90bd4e1d3473ec48d2fa3152b8a3692bcc7'
 ghc-args: []
