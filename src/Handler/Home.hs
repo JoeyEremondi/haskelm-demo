@@ -74,7 +74,7 @@ getHomeR = defaultLayout $ do
         }
         
         #markdownoutput {
-            border: 1px dashed #090;
+            border: 1px dashed #090; 
             padding: 0.5em;
             background: #cfc;
         }
