@@ -24,7 +24,7 @@ import Signal
 import Text (plainText)
 
 
-main : Element
+main : Element 
 main =
   flow down
     [ message
